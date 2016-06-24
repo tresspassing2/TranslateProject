@@ -1,71 +1,71 @@
-翻译申请 tresspassing2
-Part 12 - LFCS: How to Explore Linux with Installed Help Documentations and Tools
+LFCS 第 12 讲：如何使用已安装的帮助文档和工具探索 Linux
 ==================================================================================
 
-Because of the changes in the LFCS exam requirements effective Feb. 2, 2016, we are adding the necessary topics to the [LFCS series][1] published here. To prepare for this exam, your are highly encouraged to use the [LFCE series][2] as well.
+由于 2016 年 2 月 2 日 LFCS 考试要求变更生效，我们正在向 [LFCS 系列][1] 增加必要的课题并发布在 [这里][1] 。为了准备考试，同时也强烈建议你阅读 [LFCE 系列][2] 的文章。
 
 ![](http://www.tecmint.com/wp-content/uploads/2016/03/Explore-Linux-with-Documentation-and-Tools.png)
->LFCS: Explore Linux with Installed Documentations and Tools – Part 12
+>LFCS: 使用已安装的帮助文档和工具探索 Linux ——第 12 部分
 
-Once you get used to working with the command line and feel comfortable doing so, you realize that a regular Linux installation includes all the documentation you need to use and configure the system.
+一旦你习惯于使用命令行工作并且对此感到惬意，你会意识到一份常规的 Linux 安装已经包含了使用和配置系统所需的全部说明文档。
 
-Another good reason to become familiar with command line help tools is that in the [LFCS][3] and [LFCE][4] exams, those are the only sources of information you can use – no internet browsing and no googling. It’s just you and the command line.
+去熟悉命令行的帮助工具的另一个好的理由是，在 [LFCS][3] 和 [LFCE][4] 考试中，它们是你可用的信息资源——因为没有互联网和谷歌，只有你和命令行。
 
-For that reason, in this article we will give you some tips to effectively use the installed docs and tools in order to prepare to pass the **Linux Foundation Certification** exams.
+出于这个原因，这篇文章将给你一些关于有效利用已安装的文档和和工具来准备通过 **Linux Foundation Certification** （即 LFC)考试的小贴士。
 
-### Linux Man Pages
+### Linux 帮助页面（Man Page）
 
-A man page, short for manual page, is nothing less and nothing more than what the word suggests: a manual for a given tool. It contains the list of options (with explanation) that the command supports, and some man pages even include usage examples as well.
+“man page”，是“manual page”的缩写，意思即为其字面理解：已有工具的使用手册。它包含命令支持的选项列表（连带其解释），有些使用说明甚至还包括使用实例。
 
-To open a man page, use the **man command** followed by the name of the tool you want to learn more about. For example:
+要打开帮助页面，使用加在你所想要进一步了解的工具名称后面的 **帮助命令** 。例如：
 
 ```
 # man diff
 ```
 
-will open the manual page for `diff`, a tool used to compare text files line by line (to exit, simply hit the q key.).
+将会打开“diff”（“diff”为“different”的缩写，中文解释：区别。）的帮助页面，该工具用于逐行比较文本文件（想要退出，只要按一下q键。）。
 
-Let’s say we want to compare two text files named `file1` and `file2` in Linux. These files contain the list of packages that are installed in two Linux boxes with the same distribution and version.
+假设我们想要在Linux系统中比较两个名为“file1”和“file2”的文本文件。这些文件包含了两台安装了相同发行版且版本相同的 Linux 电脑上所安装的软件包列表。
 
-Doing a `diff` between `file1` and `file2` will tell us if there is a difference between those lists:
+对“diff1”和“diff2”这两个文件执行“diff”命令，将会返回告诉我们这些列表中 是否有区别：
 
 ```
 # diff file1 file2
 ```
 
 ![](http://www.tecmint.com/wp-content/uploads/2016/03/Compare-Two-Text-Files-in-Linux.png)
->Compare Two Text Files in Linux
+>在Linux下比较两个文本文件
 
-where the `<` sign indicates lines missing in `file2`. If there were lines missing in `file1`, they would be indicated by the `>` sign instead.
+有“<”符号的地方表示在“file2”中有行缺失；取而代之的是，如果在“file1”中有行缺失，它们将由“>”符号表示。
 
-On the other hand, **7d6** means line **#7** in file should be deleted in order to match `file2` (same with **24d22** and **41d38**), and 65,67d61 tells us we need to remove lines **65** through **67** in file one. If we make these corrections, both files will then be identical.
+另一方面， **7d6** 表示文件中的第 **#7** 行应该被删除以与“file2”一致 ( **24d22** 和 **41d38** 是同样的道理), 以及 **65,67d61** 告诉我们，我们需要移除一号文件中的第 **65** 行到第 **67** 行。如果我们做了这些更正，它们将会变成两个完全相同的文件。
 
-Alternatively, you can display both files side by side using the `-y` option, according to the man page. You may find this helpful to more easily identify missing lines in files:
+另外，根据帮助页面，你可以通过使用选项“-y”来并列显示两个文件。你会发现这样来确定文件中缺失的行更简单：
 
 ```
 # diff -y file1 file2
 ```
 
 ![](http://www.tecmint.com/wp-content/uploads/2016/03/Compare-and-List-Difference-of-Two-Files.png)
->Compare and List Difference of Two Files
+>比较并列出两个文件的不同之处
 
-Also, you can use `diff` to compare two binary files. If they are identical, `diff` will exit silently without output. Otherwise, it will return the following message: “**Binary files X and Y differ**”.
+同样的，你也可以使用“diff”命令比较两个二进制文件。如果他们完全相同，“diff”命令将没有任何输出并会静默退出。否则，它会返回如下消息：“**Binary files X and Y differ**”（二进制文件X和Y有区别）。
 
-### The –help Option
+###“--help”（帮助）选项
 
-The `--help` option, available in many (if not all) commands, can be considered a short manual page for that specific command. Although it does not provide a comprehensive description of the tool, it is an easy way to obtain information on the usage of a program and a list of its available options at a quick glance.
+在许多（不是所有的）命令中，“--help”选项被用于显示该命令的一份简短使用指南，尽管它并不提供这个工具的综合描述，它仍然是一个快速获取有关该程序的用法和其可用选项的好方法。
 
-For example,
+例如：
 
 ```
 # sed --help
 ```
 
-shows the usage of each option available in sed (the stream editor).
+显示“sed”(stream editor，一个非交互式上下文编辑器)的各可用选项的用法。
 
-One of the classic examples of using `sed` consists of replacing characters in files. Using the `-i` option (described as “**edit files in place**”), you can edit a file without opening it. If you want to make a backup of the original contents as well, use the `-i` option followed by a SUFFIX to create a separate file with the original contents.
+一个经典的例子是使用“sed”来替换文件中的字符。通过使用“-i”选项（原处打开文件），你可以在不打开文件的情况下编辑一个文件。如果你还想要对原文件做一个备份，
+在“-i“选项后面加一个后缀来使用原文件的内容创建一个独立的文件。
 
-For example, to replace each occurrence of the word `Lorem` with `Tecmint` (case insensitive) in `lorem.txt` and create a new file with the original contents of the file, do:
+例如，要把“lorem.txt”文件中每一个出现的“Lorem”单词替换为“Tecmint”（不分大小写）并用原文件的内容创建一个新文件，执行如下操作：
 
 ```
 # less lorem.txt | grep -i lorem
@@ -74,20 +74,20 @@ For example, to replace each occurrence of the word `Lorem` with `Tecmint` (case
 # less lorem.txt.orig | grep -i lorem
 ```
 
-Please note that every occurrence of `Lorem` has been replaced with `Tecmint` in `lorem.txt`, and the original contents of `lorem.txt` has been saved to `lorem.txt.orig`.
+请注意，“lorem.txt”文件中的每一个出现的“Lorem”都被替换成了“Tecmint”，而原文件的内容被保存至“lorem.txt.orig”了。
 
 ![](http://www.tecmint.com/wp-content/uploads/2016/03/Replace-A-String-in-File.png)
->Replace A String in Files
+>在文件中替换字符串
 
-### Installed Documentation in /usr/share/doc
+###在 /usr/share/doc 目录下已安装的帮助文件
 
-This is probably my favorite pick. If you go to `/usr/share/doc` and do a directory listing, you will see lots of directories with the names of the installed tools in your Linux system.
+这或许是我最喜欢的一招。如果你转到“/usr/share/doc”目录下并且列出子目录，你会发现许许多多以你 Linux 系统中已安装的工具命名的目录。
 
-According to the [Filesystem Hierarchy Standard][5], these directories contain useful information that might not be in the man pages, along with templates and configuration files to make configuration easier.
+根据 [文件系统层次结构标准][5]，这些目录包含着帮助页面中也许没有的有用信息，同时还有能使配置过程更简便的模板和配置文件。
 
-For example, let’s consider `squid-3.3.8` (version may vary from distribution to distribution) for the popular HTTP proxy and [squid cache server][6].
+例如，let鈥檚 consider `squid-3.3.8` (version may vary from distribution to distribution) for the popular HTTP proxy and [squid cache server][6].
 
-Let’s `cd` into that directory:
+Let鈥檚 `cd` into that directory:
 
 ```
 # cd /usr/share/doc/squid-3.3.8
@@ -131,7 +131,7 @@ Additionally, GNU info can be used to display regular man pages as well when fol
 
 will return the man page of **tune2fs**, the ext2/3/4 filesystems management tool.
 
-And now that we’re at it, let’s review some of the uses of **tune2fs**:
+And now that we鈥檙e at it, let鈥檚 review some of the uses of **tune2fs**:
 
 Display information about the filesystem on top of **/dev/mapper/vg00-vol_backups**:
 
@@ -165,10 +165,12 @@ Questions and other comments are more than welcome as well.
 via: http://www.tecmint.com/linux-basic-shell-scripting-and-linux-filesystem-troubleshooting/
 
 作者：[Gabriel Cánepa][a]
-译者：[译者ID](https://github.com/译者ID)
-校对：[校对者ID](https://github.com/校对者ID)
+译者1：[tresspassing2](https://git.oschina.net/tresspassing2)
+译者2：[译者ID](https://github.com/译者ID)
+校对1：[tresspassing2](https://github.com/tresspassing2)
+校对2：[校对者ID](https://github.com/校对者ID)
 
-本文由 [LCTT](https://github.com/LCTT/TranslateProject) 原创翻译，[Linux中国](https://linux.cn/) 荣誉推出
+本文由 [LCTT](https://git.oschina.net/tresspassing2/TranslateProject) 原创翻译，[Linux中国](https://linux.cn/) 荣誉推出
 
 [a]:http://www.tecmint.com/author/gacanepa/
 [1]: http://www.tecmint.com/sed-command-to-create-edit-and-manipulate-files-in-linux/
